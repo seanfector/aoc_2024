@@ -1,14 +1,11 @@
 library(dplyr)
-library(sqldf)
-library(ggplot2)
-library(reshape2)
-library(lubridate)
-
 `%notin%` = function(x,y) !(x %in% y)
 
-###### AOC day 1
+
+### read in da file
 
 day_01 <- read.csv("/Users/seankuhn/Downloads/aoc_2024_day_01.csv")
+
 
 ### part 1: order each vector, calc sum of abs diff.
 
@@ -21,10 +18,9 @@ dc2 <- day_01 %>%
   arrange(c2)
 
 d1 <- cbind(dc1, dc2)
-
 d1$diff <- with(d1, abs(c1-c2))
-
 print(paste0("the answer to part 1 is ", sum(d1$diff)))
+
 
 ### part 2: figure out exactly how often each number from the left list appears in the right list 
                 # and calc. "similarity score" as {value} * {# appearances}
