@@ -1,5 +1,10 @@
 # aoc_2024
 repo for advent of code responses
 
-### hark!
-i'm making a committ to the readme file from RStudio, at 12:47 PM ET 
+### hark! here's a header committed from RStudio
+and here's a line committed from same
+following along with these instructions (chapter 12):
+https://happygitwithr.com/rstudio-git-github
+
+### now it is 13:08 ET, and i'm trying to update the readme file again
+test test test, test some more
