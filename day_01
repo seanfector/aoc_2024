@@ -4,7 +4,7 @@ library(dplyr)
 
 ### read in da file
 
-day_01 <- read.csv("/Users/seankuhn/Downloads/aoc_2024_day_01.csv")
+day_01 <- read.csv("aoc_2024_day_01.csv")
 
 
 ### part 1: order each vector, calc sum of abs diff.
