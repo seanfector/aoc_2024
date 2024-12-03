@@ -14,28 +14,21 @@ day_02 <- read.csv("/Users/seankuhn/Downloads/aoc_2024_day_02.csv")
 
 day_02_long <- day_02 %>%
   tidyr::separate_longer_delim(report, delim = " ") %>% # this is a slick, split-and-pivot function
-  mutate(report = as.numeric(report)) # because it's natively a chr string
-
-day_02_long <- day_02_long %>%
+  mutate(report = as.numeric(report)) %>% # because it's natively a chr string
   group_by(index) %>%
   mutate(rn = row_number(),
          lag_report = lag(report),
-         test_1 = ifelse(report == lag_report, "equal", 
-                       ifelse(report > lag_report, "increasing",
-                              "decreasing"))) %>%
+         test_1 = ifelse(report == lag_report, "equal", ifelse(report > lag_report, "increasing", "decreasing"))) %>%
   filter(!is.na(lag_report)) %>%
   mutate(delta = abs(report - lag_report),
-         test_2 = ifelse(delta > 3, "fail", "pass")) %>%
-  ungroup()
+         test_2 = ifelse(delta > 3, "fail", "pass"))
 
 day_02_final <- day_02_long %>%
-  group_by(index) %>%
   summarise(test_1_check = ifelse(min(test_1) == max(test_1) & min(test_1) %in% c("increasing", "decreasing"), 1, 0),
             test_2_check = ifelse(min(test_2) == "pass", 1, 0)) %>%
-  filter(test_1_check == 1 & test_2_check == 1) %>%
-  nrow() 
+  filter(test_1_check == 1 & test_2_check == 1)
 
-print(paste0("the answer to part 1 is ", day_02_final))
+print(paste0("the answer to part 1 is ", nrow(day_02_final)))
 
 
 ### part 2:
@@ -76,9 +69,7 @@ day_02_ll <- catch_df
 day_02_ll_2 <- day_02_ll %>%
   group_by(index, kicked_out) %>%
   mutate(lag_report = lag(report),
-         test_1 = ifelse(report == lag_report, "equal", 
-                         ifelse(report > lag_report, "increasing",
-                                "decreasing"))) %>%
+         test_1 = ifelse(report == lag_report, "equal", ifelse(report > lag_report, "increasing", "decreasing"))) %>%
   filter(!is.na(lag_report)) %>%
   mutate(delta = abs(report - lag_report),
          test_2 = ifelse(delta > 3, "fail", "pass")) %>%
