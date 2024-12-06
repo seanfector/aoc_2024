@@ -27,8 +27,6 @@ day_05_b_split <- day_05_b %>%
 seq_seq <- seq(1, nrow(day_05_b), 1)
 catch_df <- data.frame()
 
-s <- 2
-
 for(s in seq_seq){
   
   sequences_sub <- day_05_b_split %>% 
@@ -91,6 +89,7 @@ for(o in ooo_seq_helper){
   
   # intuition: in a sequence of length N, the element that should be first will have the most (N-1) "before" rules
   # basically: you can order observations based on the number of before/after rules for each one
+  # the subtracting a half thing is because you're gonna wind up with one observation too few in `x` for dyad reasons
   
   x <- split_sub %>%
     group_by(before) %>%
